@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{% static 'psys/CSS/CustomerManagementMenu.css' %}" />
+  <title>商品編集</title>
+</head>
+<body>
+
+  <h1>管理システム</h1>
+  <h2>商品編集</h2>
+
+  <a href="{% url 'psys:item_list' %}" class="btn btn-secondary" style="margin-left:20px;">
+    ← 商品一覧へ戻る
+  </a>
+
+  <div style="margin: 16px 20px;">
+    <p>商品コード：<b>{{ item.item_code }}</b></p>
+
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn">更新</button>
+    </form>
+  </div>
+
+</body>
+</html>

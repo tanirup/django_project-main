@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{% static 'psys/CSS/CustomerManagementMenu.css' %}">
+  <title>従業員 新規登録</title>
+</head>
+<body>
+
+  <h1>管理システム</h1>
+  <h2>従業員 新規登録</h2>
+
+  <a href="{% url 'psys:customer_management' %}" class="btn btn-secondary" style="margin-left:20px;">
+    ← 得意先管理メニューに戻る
+  </a>
+
+  {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  <form method="post" style="margin:20px;">
+    {% csrf_token %}
+
+    <table>
+      <thead>
+        <tr>
+          <th>項目</th>
+          <th>入力</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>従業員番号（6文字）</td>
+          <td>
+            {{ form.employee_no }}
+            {% for e in form.employee_no.errors %}<div class="error">{{ e }}</div>{% endfor %}
+          </td>
+        </tr>
+        <tr>
+          <td>氏名</td>
+          <td>
+            {{ form.employee_name }}
+            {% for e in form.employee_name.errors %}<div class="error">{{ e }}</div>{% endfor %}
+          </td>
+        </tr>
+        <tr>
+          <td>パスワード（8文字以内）</td>
+          <td>
+            {{ form.password }}
+            {% for e in form.password.errors %}<div class="error">{{ e }}</div>{% endfor %}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="margin-top:16px;">
+      <button type="submit" class="btn">登録</button>
+    </div>
+  </form>
+
+</body>
+</html>

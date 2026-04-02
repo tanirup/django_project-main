@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>従業員情報の編集</title>
+  <link rel="stylesheet" href="{% static 'psys/CSS/CustomerManagementMenu.css' %}">
+</head>
+<body>
+
+  <h1>管理システム</h1>
+  <h2>従業員情報の編集</h2>
+
+  <a href="{% url 'psys:employee_list' %}" class="btn btn-secondary" style="margin-left:20px;">
+    ← 従業員一覧に戻る
+  </a>
+
+  <div style="margin:20px;">
+    <p>従業員番号： <strong>{{ employee.employee_no }}</strong></p>
+
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+
+      <button type="submit" class="btn" style="padding:8px 14px;">
+        更新する
+      </button>
+    </form>
+
+    <p style="margin-top:12px; color:#666;">
+      ※ パスワード欄を変更するとログインパスワードも更新されます。
+    </p>
+  </div>
+
+</body>
+</html>

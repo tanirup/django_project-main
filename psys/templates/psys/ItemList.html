@@ -1,0 +1,169 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{% static 'psys/CSS/CustomerManagementMenu.css' %}"
+    />
+    <title>商品管理</title>
+  </head>
+  <body>
+    <h1>管理システム</h1>
+    <h2>商品管理（一覧）</h2>
+
+    <a
+      href="{% url 'psys:customer_management' %}"
+      class="btn btn-secondary"
+      style="margin-left: 20px"
+    >
+      ← 管理メニューへ戻る
+    </a>
+
+    <!-- 指標 -->
+    <div style="margin: 16px 20px">
+      <span style="margin-right: 14px">総商品数：<b>{{ total_items }}</b></span>
+      <span style="margin-right: 14px"
+        >在庫50未満：<b>{{ low_stock_count }}</b></span
+      >
+      <span>在庫0：<b>{{ out_of_stock_count }}</b></span>
+    </div>
+
+    <!-- 検索 / 在庫 / 期間 -->
+    <form method="get" style="margin: 0 20px 16px">
+      <input
+        type="text"
+        name="q"
+        value="{{ q }}"
+        placeholder="商品コード or 商品名で検索"
+        style="padding: 8px; width: 240px"
+      />
+      <input
+        type="text"
+        name="stock_lt"
+        value="{{ stock_lt }}"
+        placeholder="在庫しきい値(例: 50)"
+        style="padding: 8px; width: 180px"
+      />
+      <button type="submit" class="btn" style="padding: 8px 12px">反映</button>
+      <a
+        href="{% url 'psys:item_list' %}"
+        class="btn btn-secondary"
+        style="padding: 8px 12px"
+        >リセット</a
+      >
+    </form>
+
+    <!-- 商品一覧 -->
+    <table>
+      <thead>
+        <tr>
+          <th>商品コード</th>
+          <th>商品名</th>
+          <th>価格</th>
+          <th>在庫</th>
+          <th>状態</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for i in items %}
+        <tr>
+          <td>{{ i.item_code }}</td>
+          <td>{{ i.item_name }}</td>
+          <td>{{ i.price }}</td>
+          <td>{{ i.stock }}</td>
+
+          <td>
+            {% if i.stock == 0 %}
+            <span style="color: red; font-weight: bold">在庫切れ</span>
+            {% elif i.stock < 50 %}
+            <span style="color: #d97706; font-weight: bold">残りわずか</span>
+            {% else %}
+            <span>OK</span>
+            {% endif %}
+          </td>
+
+          <td style="white-space: nowrap">
+            <a
+              href="{% url 'psys:item_update' i.item_code %}"
+              class="btn"
+              style="padding: 6px 10px; display: inline-block"
+            >
+              編集
+            </a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="6">商品データがありません。</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <!-- ランキング -->
+    <h2 style="margin-top: 30px">
+      売れ筋 / 売上ランキング（order_details集計）
+    </h2>
+
+    <div style="display: flex; gap: 20px; flex-wrap: wrap; margin: 0 20px 20px">
+      <!-- 売れ筋（数量） -->
+      <div style="flex: 1; min-width: 320px">
+        <h3>売れ筋 TOP10（数量）</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>順位</th>
+              <th>商品</th>
+              <th>合計数量</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for r in top_by_qty %}
+            <tr>
+              <td>{{ forloop.counter }}</td>
+              <td>{{ r.item_code }} {{ r.item_name }}</td>
+              <td>{{ r.total_qty }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="3">データがありません。</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 売上（金額） -->
+      <div style="flex: 1; min-width: 320px">
+        <h3>売上 TOP10（金額）</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>順位</th>
+              <th>商品</th>
+              <th>合計売上</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for r in top_by_sales %}
+            <tr>
+              <td>{{ forloop.counter }}</td>
+              <td>{{ r.item_code }} {{ r.item_name }}</td>
+              <td>{{ r.total_sales }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="3">データがありません。</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

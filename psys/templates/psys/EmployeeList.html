@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- 既存CSSを適用 -->
+  <link rel="stylesheet" href="{% static 'psys/CSS/CustomerManagementMenu.css' %}" />
+  <title>従業員一覧</title>
+</head>
+
+<body>
+
+  <h1>管理システム</h1>
+  <h2>従業員一覧</h2>
+
+  {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+          {{ message }}
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  <!-- 戻るボタン（必要なら） -->
+  <a href="{% url 'psys:customer_management' %}" class="btn btn-secondary" style="margin-left:20px;">
+    ← 得意先管理メニューに戻る
+  </a>
+
+  <table style="margin-top:16px;">
+    <thead>
+      <tr>
+        <th>従業員番号</th>
+        <th>氏名</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for e in employees %}
+      <tr>
+        <td>{{ e.employee_no }}</td>
+        <td>{{ e.employee_name }}</td>
+
+        <td style="white-space:nowrap;">
+          <a href="{% url 'psys:employee_update' e.employee_no %}"
+             class="btn"
+             style="padding:6px 10px; display:inline-block;">
+            編集
+          </a>
+
+          <form method="post"
+                action="{% url 'psys:employee_delete' e.employee_no %}"
+                style="display:inline;">
+            {% csrf_token %}
+            <button type="submit"
+                    class="btn btn-danger"
+                    onclick="return confirm('従業員 {{ e.employee_no }} を削除しますか？');"
+                    style="padding:6px 10px;">
+              削除
+            </button>
+          </form>
+        </td>
+      </tr>
+
+      {% empty %}
+      <tr>
+        <td colspan="3">従業員データがありません。</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+</body>
+</html>

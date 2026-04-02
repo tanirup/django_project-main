@@ -1,0 +1,263 @@
+/* ==============================
+   全体基本設定
+============================== */
+body {
+  font-family: "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+  margin: 0;
+  background-color: #f5f7fa;
+  color: #ffffff;
+}
+
+h1 {
+  background-color: #009944;
+  color: white;
+  text-align: center;
+  position: center;
+  padding: 15px 0;
+  margin: 0;
+  font-size: 1.6em;
+  letter-spacing: 1px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+/* ==============================
+     ヘッダー
+  ============================== */
+.site-header {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: green;
+  padding: 15px 0;
+  width: 100%;
+  z-index: 100;
+}
+
+.site-header .container {
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+}
+
+.logo {
+  font-size: 2em;
+  font-weight: bold;
+  background-color: #00aa00/cover;
+  border-radius: 8px;
+  text-align: center;
+  margin: 0 auto;
+  margin-bottom: 0px;
+}
+
+.main-content {
+  text-align: center;
+}
+
+/* ==============================
+     ナビゲーションメニュー
+  ============================== */
+.nav-menu a {
+  color: green;
+  text-decoration: none;
+  margin-top: 30px;
+  margin-left: 50px;
+  transition: 0.3s;
+  display: inline;
+  text-align: center;
+}
+
+.nav-menu a:hover {
+  color: blue;
+}
+
+.nav-btn {
+  border-radius: 8px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.3s;
+}
+
+.btn-home {
+  background-color: white;
+  padding: 10px 40px;
+}
+
+.btn-service {
+  background-color: white;
+  padding: 10px 30px;
+}
+
+.btn-customer {
+  background-color: white;
+  padding: 10px 20px;
+}
+
+.btn-contact {
+  background-color: white;
+  padding: 10px 20px;
+}
+
+.btn-login {
+  background-color: white;
+  color: #fff;
+  padding: 8px 18px;
+  border-radius: 25px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: 2px solid white;
+  position: absolute;
+  right: 40px;
+  top: 15px;
+  color: green;
+}
+
+/* ホバー時の変化 */
+.btn-login:hover {
+  background-color: white;
+  border-color: white;
+  transform: translateY(-2px);
+}
+
+/* スマホ対応 */
+@media screen and (max-width: 768px) {
+  .btn-login {
+    position: static; /* 固定解除してメニュー下に表示 */
+    margin-top: 10px;
+    align-self: flex-end;
+  }
+}
+/* ==============================
+     ヒーローセクション
+  ============================== */
+.hero {
+  background: linear-gradient(to right, #004aad, #0074e4);
+  color: white;
+  text-align: center;
+  padding: 120px 20px;
+}
+
+.hero-content h2 {
+  font-size: 2.5em;
+  margin-bottom: 15px;
+}
+
+.hero-content p {
+  font-size: 1.2em;
+  margin-bottom: 30px;
+}
+
+.btn {
+  background-color: #fff;
+  color: #004aad;
+  padding: 12px 25px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background-color: #cce3ff;
+}
+
+/* ==============================
+     サービス紹介
+  ============================== */
+.features {
+  background-color: #fff;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.features .container {
+  width: 90%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.features h3 {
+  font-size: 1.8em;
+  color: #004aad;
+  margin-bottom: 40px;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+}
+
+.feature-card {
+  background-color: #f8f9fc;
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+}
+
+/* ==============================
+     About セクション
+  ============================== */
+.about {
+  padding: 80px 0;
+  background-color: #f8fafc;
+  text-align: center;
+}
+
+.about h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: #00aa00;
+}
+
+.about p {
+  font-size: 1.1em;
+  line-height: 1.8;
+  color: #333;
+  max-width: 800px;
+  margin: 0 auto 40px;
+}
+
+.features-section {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.feature-item {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  padding: 30px;
+  width: 280px;
+  transition: transform 0.3s;
+}
+
+.feature-item:hover {
+  transform: translateY(-8px);
+}
+
+.feature-item h3 {
+  color: #00aa00;
+  margin-bottom: 10px;
+}
+
+/* ==============================
+     フッター
+  ============================== */
+.site-footer {
+  background-color: #004aad;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  margin-top: 60px;
+  font-size: 0.9em;
+}

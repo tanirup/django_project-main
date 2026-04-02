@@ -1,0 +1,208 @@
+/* ==============================
+   全体基本設定
+============================== */
+body {
+  font-family: "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+  margin: 0;
+  background: linear-gradient(180deg, #f5f7fa 0%, #e9eef5 100%);
+  color: #333;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* ==============================
+   ヘッダー
+============================== */
+.main-header {
+  background: linear-gradient(to right, #009944, #00b36b);
+  color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px 30px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+}
+
+.header-left h1 {
+  font-size: 1.4em;
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.header-right .welcome-text {
+  font-size: 0.9em;
+  color: #f0f0f0;
+}
+
+.logout-btn {
+  font-size: 0.9em;
+  color: #009944;
+  background-color: #fff;
+  padding: 6px 14px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+  background-color: #e6fff0;
+  transform: translateY(-2px);
+}
+
+/* ==============================
+   メインコンテンツ（ヘッダー下の余白確保）
+============================== */
+.main-content {
+  margin-top: 90px; /* ヘッダー高さ分の余白 */
+  text-align: center;
+  padding: 0 20px 60px;
+}
+
+/* メニュータイトル */
+.menu-title {
+  font-size: 1.8em;
+  margin-bottom: 40px;
+  color: #00773e;
+  position: relative;
+}
+
+.menu-title::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  background-color: #00aa55;
+  margin: 10px auto 0;
+  border-radius: 2px;
+}
+
+/* ==============================
+   メニューカードエリア
+============================== */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  justify-items: center;
+}
+
+.menu-card {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 30px 20px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  text-decoration: none;
+  color: #333;
+  width: 100%;
+  max-width: 280px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.menu-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(to right, #00aa55, #00cc66);
+  transition: opacity 0.3s;
+  opacity: 0;
+}
+
+.menu-card:hover::before {
+  opacity: 1;
+}
+
+.menu-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.menu-card h3 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  color: #009944;
+}
+
+.menu-card p {
+  font-size: 0.9em;
+  color: #555;
+}
+
+/* 特別デザイン（ログアウトカード） */
+.logout-card {
+  background: #fff5f5;
+  border: 2px solid #ff8080;
+}
+
+.logout-card h3 {
+  color: #ff4d4d;
+}
+
+/* ==============================
+   フッター
+============================== */
+.main-footer {
+  background-color: #00773e;
+  color: #fff;
+  text-align: center;
+  padding: 15px;
+  margin-top: 40px;
+  font-size: 0.9em;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* ==============================
+   レスポンシブ対応
+============================== */
+@media screen and (max-width: 768px) {
+  .main-header {
+    flex-direction: column;
+    height: auto;
+    padding: 15px;
+    text-align: center;
+  }
+
+  .header-right {
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .menu-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .menu-card {
+    max-width: 90%;
+  }
+}
+
+.messages {
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  background-color: #f0f8ff;
+  color: #333;
+}
+.success {
+  border-color: green;
+  background-color: #e0ffe0;
+}

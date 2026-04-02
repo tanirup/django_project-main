@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'psys/CSS/CustomerManagementMenu.css' %}">
+  <title>得意先別集計</title>
+</head>
+<body>
+
+  <h1>管理システム</h1>
+  <h2>得意先別集計</h2>
+
+  <!-- メインメニューへ戻る -->
+  <a href="{% url 'psys:main_menu' %}" class="btn btn-secondary" style="margin-left:20px;">
+    ← メインメニューに戻る
+  </a>
+
+  <table>
+    <thead>
+      <tr>
+        <th>コード</th>
+        <th>名前</th>
+        <th>件数</th>
+        <th>合計金額</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for row in summary_list %}
+      <tr>
+        <td>{{ row.customer_code }}</td>
+        <td>{{ row.customer_name }}</td>
+        <td>{{ row.total_count }}</td>
+        <td>{{ row.total_amount }} 円</td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="4">データがありません。</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+</body>
+</html>

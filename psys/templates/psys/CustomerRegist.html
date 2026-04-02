@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>得意先登録</title>
+    <link
+      rel="stylesheet"
+      href="{% static 'psys/CSS/CustomerManagementMenu.css' %}"
+    />
+  </head>
+  <body>
+    <h1>管理システム</h1>
+    <h2>得意先登録</h2>
+    <a href="{% url 'psys:customer_regist' %}">得意先登録</a>
+
+    {% if form.errors %}
+    <div style="color: red">
+      <p>入力内容に誤りがあります：</p>
+      <ul>
+        {% for field in form %} {% for error in field.errors %}
+        <li>{{ field.label }}: {{ error }}</li>
+        {% endfor %} {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+    <form method="post">
+      {% csrf_token %}
+      <table>
+        <tr>
+          <th>{{ form.customer_code.label_tag }}</th>
+          <td>{{ form.customer_code }}</td>
+        </tr>
+        <tr>
+          <th>{{ form.customer_name.label_tag }}</th>
+          <td>{{ form.customer_name }}</td>
+        </tr>
+        <tr>
+          <th>{{ form.customer_telno.label_tag }}</th>
+          <td>{{ form.customer_telno }}</td>
+        </tr>
+        <tr>
+          <th>{{ form.customer_postalcode.label_tag }}</th>
+          <td>{{ form.customer_postalcode }}</td>
+        </tr>
+        <tr>
+          <th>{{ form.customer_address.label_tag }}</th>
+          <td>{{ form.customer_address }}</td>
+        </tr>
+        
+      </table>
+
+      <button type="submit">登録</button>
+    </form>
+
+    <p><a href="{% url 'psys:customer_management' %}">← 得意先管理メニューへ戻る</a></p>
+  </body>
+</html>

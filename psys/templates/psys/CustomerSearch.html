@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>得意先検索</title>
+    <link
+      rel="stylesheet"
+      href="{% static 'psys/CSS/CustomerManagementMenu.css' %}"
+    />
+  </head>
+  <body>
+    <h1>管理システム</h1>
+    <h2>得意先検索</h2>
+
+    <a href="{% url 'psys:customer_regist' %}" class="register-link">
+      ＋ 得意先を新規登録する
+    </a>
+
+    <a href="{% url 'psys:customer_management' %}" class="back-link">
+      得意先管理メニューに戻る
+    </a>
+
+    <!-- 🔥 修正ポイント：action を必ず追加 -->
+    <form method="get" action="{% url 'psys:customer_search' %}">
+      <label for="id_q">
+        キーワード（コード・名前・電話・住所・郵便番号）:
+      </label>
+      <input type="text" name="q" id="id_q" value="{{ query }}" />
+      <button type="submit">検索</button>
+    </form>
+
+    {% if results %}
+    <h2>検索結果</h2>
+    <table border="1">
+      <tr>
+        <th>コード</th>
+        <th>名前</th>
+        <th>電話番号</th>
+        <th>郵便番号</th>
+        <th>住所</th>
+      </tr>
+
+      {% for c in results %}
+      <tr>
+        <td>{{ c.customer_code }}</td>
+        <td>{{ c.customer_name }}</td>
+        <td>{{ c.customer_telno }}</td>
+        <td>{{ c.customer_postalcode }}</td>
+        <td>{{ c.customer_address }}</td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="5">該当する得意先が見つかりませんでした。</td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% endif %}
+  </body>
+</html>

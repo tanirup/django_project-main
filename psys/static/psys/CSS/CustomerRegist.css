@@ -1,0 +1,15 @@
+
+/* psys/static/psys/CustomerRegist.css */
+body {
+    font-family: sans-serif;
+    background-color: #f8f8f8;
+}
+
+table {
+    margin: 1em 0;
+}
+
+th {
+    text-align: left;
+    padding-right: 1em;
+}

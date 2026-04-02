@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <title>メインメニュー | 顧客管理システム</title>
+    <link rel="stylesheet" href="{% static 'psys/CSS/CustomerManagementMenu.css' %}" />
+</head>
+<body>
+
+    <!-- ===== ヘッダー ===== -->
+    <header class="main-header">
+        <div class="header-left">
+            <h1>管理システム</h1>
+        </div>
+        <div class="header-right">
+            <span class="welcome-text">{{ user.username }} さん</span>
+        </div>
+    </header>
+
+    <!-- ===== メインコンテンツ ===== -->
+    <main class="main-content">
+        <h2 class="menu-title">メインメニュー</h2>
+
+        <div class="menu-grid">
+
+            <!-- 得意先管理 -->
+            <a href="{% url 'psys:customer_management' %}" class="menu-card">
+                <h3>得意先管理</h3>
+            </a>
+
+            <!-- 得意先別集計 -->
+            <a href="{% url 'psys:customer_summary' %}" class="menu-card">
+                <h3>得意先別集計</h3>
+            </a>
+
+            <!-- ログアウト（POST送信） -->
+            <a href="#"
+               onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+               class="menu-card logout-card">
+                <h3>ログアウト</h3>
+            </a>
+
+            <form id="logout-form"
+                  action="{% url 'psys:logout' %}"
+                  method="post"
+                  style="display:none;">
+                {% csrf_token %}
+            </form>
+
+        </div>
+    </main>
+
+
+</body>
+</html>

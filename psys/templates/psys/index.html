@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>トップページ | システム開発・生産・保管</title>
+
+    <!-- ✅ この1行が超重要！ -->
+    <link rel="stylesheet" href="{% static 'psys/CSS/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'psys/JS/script.js' %}"/>
+  </head>
+  <body>
+    <section>
+    <header class="site-header">
+      <div class="container">
+        <h1 class="logo">TechWorks Solutions</h1>
+       <!-- ✅ ログインボタンを右上に配置 -->
+        <a href="{% url 'psys:login' %}" class="nav-btn btn-login">ログイン</a>
+      </div>
+    </header>
+    </section>
+
+    <section class="hero">
+      <div class="hero-content">
+        <h2>システム開発・生産・保管</h2>
+        <p>
+          私たちは、業務効率を最大化するトータルソリューションを提供します。
+        </p>
+        <a href="#" class="btn">詳細を見る</a>
+      </div>
+    </section>
+    <section class="about">
+      <div class="container">
+        <h2>私たちについて</h2>
+        <p>
+          TechWorks Solutionsは、システム開発から生産・保管まで一貫したサポートを提供する
+          テクノロジーカンパニーです。<br />
+          クライアントの課題を理解し、最適なソリューションを設計・構築することで、
+          ビジネスの成長と効率化を実現します。
+        </p>
+    
+        <div class="features-section">
+          <div class="feature-item">
+            <h3>システム開発</h3>
+            <p>
+              最新のWeb技術と堅牢な設計で、スピーディーかつ安全なシステムを構築します。
+            </p>
+          </div>
+    
+          <div class="feature-item">
+            <h3>生産管理</h3>
+            <p>
+              製造現場のデータを活用し、効率的な生産ラインとコスト削減を実現します。
+            </p>
+          </div>
+    
+          <div class="feature-item">
+            <h3>保管・ロジスティクス</h3>
+            <p>
+              在庫の最適化と物流の自動化で、サプライチェーン全体のパフォーマンスを向上。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <footer class="site-footer">
+      <p>© 2025 TechWorks Solutions. All rights reserved.</p>
+    </footer>
+  </body>
+</html>

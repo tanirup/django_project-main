@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{% static 'psys/CSS/CustomerManagementMenu.css'%}"
+    />
+    <title>得意先管理メニュー</title>
+  </head>
+  <body>
+    <h1>管理システム</h1>
+    <h2>得意先管理メニュー</h2>
+
+    <ul>
+      <li>
+        <a href="{% url 'psys:customer_search' %}" class="btn">
+          得意先検索ページへ
+        </a>
+      </li>
+
+      <li>
+        <a href="{% url 'psys:customer_regist' %}" class="btn">
+          得意先を新規登録する
+        </a>
+      </li>
+
+      <li>
+        <a href="{% url 'psys:customer_list' %}" class="btn">
+          得意先一覧を見る
+        </a>
+      </li>
+
+      <h2>従業員管理メニュー</h2>
+
+      <li>
+        <a href="{% url 'psys:employee_regist' %}" class="btn">
+          従業員を新規登録する
+        </a>
+      </li>
+
+      <li>
+        <a href="{% url 'psys:employee_list' %}" class="btn">
+          従業員一覧を見る
+        </a>
+      </li>
+
+      <h2>商品管理メニュー</h2>
+      <li>
+        <a href="{% url 'psys:item_list' %}" class="btn"> 商品一覧を見る </a>
+      </li>
+    </ul>
+
+    <!-- ★ ここを追加 -->
+    <div style="margin-top: 24px">
+      <a href="{% url 'psys:MainMenu' %}" class="btn btn-secondary">
+        ← メインメニューに戻る
+      </a>
+    </div>
+  </body>
+</html>

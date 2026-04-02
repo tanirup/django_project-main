@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>得意先情報更新</title>
+    <link rel="stylesheet" href="{% static 'psys/CSS/CustomerUpdate.css' %}" />
+  </head>
+  <body>
+    <h1>得意先情報の更新</h1>
+
+    <form method="post">
+      {% csrf_token %}
+      <table>
+        {{ form.as_table }}
+      </table>
+      <button type="submit">更新する</button>
+    </form>
+
+    <p><a href="{% url 'psys:customer_list' %}">← 得意先一覧に戻る</a></p>
+  </body>
+</html>
