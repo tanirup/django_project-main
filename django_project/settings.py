@@ -1,3 +1,4 @@
+import os
 """
 Django settings for django_project project.
 
@@ -78,7 +79,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'psysdb',
         'USER': 'root',
-	    'PASSWORD': 'ktcpass23',
+	    'PASSWORD': os.environ['DB_PASSWORD'],
 		'HOST': 'localhost',
         'PORT': '3306',
 	    'OPTIONS': {
