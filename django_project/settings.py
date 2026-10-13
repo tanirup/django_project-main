@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-&e4zutcu0x-4@qj#dfg8n8=0@4ikwpx23l(9x$lkp0o%39--7s'
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -29,7 +29,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
-# Application definition
+# Application definitiony
 
 INSTALLED_APPS = [
     'psys.apps.PsysConfig',
@@ -77,11 +77,11 @@ WSGI_APPLICATION = 'django_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'psysdb',
-        'USER': 'root',
+        'NAME': os.environ.get('DB_NAME', 'Django_DB'),
+        'USER': os.environ.get('DB_USER', 'Django_User'),
 	    'PASSWORD': os.environ['DB_PASSWORD'],
-		'HOST': 'localhost',
-        'PORT': '3306',
+		'HOST': os.environ.get('DB_HOST', 'localhost'),
+        'PORT': os.environ.get('DB_PORT', '3306'),
 	    'OPTIONS': {
 	        'init_command':"SET sql_mode='STRICT_TRANS_TABLES'",
 	            }
