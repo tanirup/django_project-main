@@ -1,67 +1,77 @@
-# Djangoプロジェクトの実行方法メモ
+# Djangoプロジェクト セットアップ手順
 
-## 1. プロジェクトフォルダへ移動
+## 1. プロジェクトの準備
 
 ```bash
-cd ~/Downloads/django_project-main
+git clone <リポジトリURL>
+cd <プロジェクト名>
 ```
 
-## 2. 仮想環境を作る（最初の1回だけ）
+## 2. 仮想環境の作成・有効化
 
 ```bash
 python3 -m venv venv
-```
-
-## 3. 仮想環境を有効化する
-
-```bash
 source venv/bin/activate
 ```
 
-有効化できると、ターミナルの左に `(venv)` が出る。
+※ 仮想環境の作成は初回のみ。
 
-## 4. 必要なライブラリを入れる
+## 3. 必要なライブラリのインストール
 
 ```bash
-python -m pip install django pymysql
-python -m pip install --upgrade "mysqlclient>=2.2.1"
+python -m pip install django pymysql "mysqlclient>=2.2.1"
 ```
 
-`mysqlclient` でエラーが出たら、先にこれを入れる。
+インストールでエラーが出た場合（Mac）：
 
 ```bash
 brew install mysql pkg-config
+python -m pip install --upgrade mysqlclient
 ```
 
-そのあともう一度。
+## 4. MySQLの設定
+
+`django_project/settings.py` の `DATABASES` を確認する。
+
+```python
+import os
+
+# DATABASES内
+'PASSWORD': os.environ['DB_PASSWORD'],
+```
+
+環境変数を設定する。
 
 ```bash
-python -m pip install --no-cache-dir "mysqlclient>=2.2.1"
+export DB_PASSWORD='自分のMySQLパスワード'
 ```
 
-## 5. Djangoを起動する
+※ パスワードをGitHubにPushしないこと。
+
+## 5. Djangoの起動
+
+`manage.py` があるフォルダで実行する。
 
 ```bash
 python manage.py runserver
 ```
 
-ブラウザで開く:
-
-```bash
-http://127.0.0.1:8000/
-```
+アクセス先：http://127.0.0.1:8000/
 
 ---
 
-# 毎回の起動手順
+## 毎回の起動手順
 
 ```bash
 cd ~/Downloads/django_project-main
 source venv/bin/activate
+export DB_PASSWORD='自分のMySQLパスワード'
 python manage.py runserver
 ```
 
-終わるとき:
+終了：`Ctrl + C`
+
+仮想環境の終了：
 
 ```bash
 deactivate
@@ -69,71 +79,21 @@ deactivate
 
 ---
 
-# よくあるエラー
+## よくあるエラー
 
-## `No such file or directory: manage.py`
+| エラー | 対処方法 |
+|---|---|
+| `manage.py` が見つからない | `find . -name manage.py` |
+| `No module named django` | `pip install django` |
+| `No module named pymysql` | `pip install pymysql` |
+| `No module named MySQLdb` | `pip install mysqlclient` |
+| `mysqlclient` が古い | `pip install --upgrade mysqlclient` |
+| `externally-managed-environment` | 仮想環境を有効化する |
+| `Access denied for user` | MySQLのユーザー名・パスワードを確認 |
 
-今いる場所に `manage.py` がない。
+## 注意事項
 
-確認:
-
-```bash
-find . -name manage.py
-```
-
-## `ModuleNotFoundError: No module named 'pymysql'`
-
-`pymysql` が入っていない。
-
-対処:
-
-```bash
-source venv/bin/activate
-python -m pip install pymysql
-```
-
-## `mysqlclient 2.2.1 or newer is required; you have 1.4.6`
-
-`mysqlclient` が古い。
-
-対処:
-
-```bash
-source venv/bin/activate
-python -m pip uninstall -y mysqlclient
-python -m pip install --no-cache-dir "mysqlclient>=2.2.1"
-python -m pip show mysqlclient
-```
-
-## `externally-managed-environment`
-
-Homebrew の Python に直接入れようとしている。
-
-対処:
-
-* 仮想環境 `venv` を使う
-* `source venv/bin/activate` してから `pip install` する
-
----
-
-# 確認コマンド
-
-```bash
-which python
-which pip
-python -V
-pip -V
-```
-
-`venv` が有効なら、`.../django_project-main/venv/bin/...` が出る。
-
----
-
-# 最短版
-
-```bash
-cd ~/Downloads/django_project-main
-source venv/bin/activate
-python manage.py runserver
-```
-
+- `venv/` は `.gitignore` に追加する。
+- MySQLのパスワードをGitHubに公開しない。
+- MySQLサーバーを起動しておく。
+- MySQLのデータベースとユーザーは各自で準備する。
